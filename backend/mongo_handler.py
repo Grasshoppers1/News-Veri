@@ -2,6 +2,7 @@ from pymongo import MongoClient, ASCENDING, TEXT
 from datetime import datetime, timedelta
 from config.config import MONGO_CONFIG
 from sentiment import SentimentAnalyzer
+from fetch_news import NewsFetcher
 
 class MongoHandler:
     def __init__(self):
@@ -9,6 +10,7 @@ class MongoHandler:
         self.db = self.client[MONGO_CONFIG['db_name']]
         self.col = self.db[MONGO_CONFIG['collection']]
         self.sent = SentimentAnalyzer()
+        self.fake_detector = NewsFetcher() 
         self._ensure_indexes()
 
     def _ensure_indexes(self):
@@ -22,7 +24,7 @@ class MongoHandler:
             'fetched_at': {'$gte': cutoff} },
             { "_id": False }
         ))
-
+    
     def save_articles(self, query: str, articles: list[dict]):
         now = datetime.utcnow()
         for art in articles:
@@ -30,6 +32,7 @@ class MongoHandler:
             art['fetched_at'] = now
             content = f"{art['title']} {art.get('description','')}"
             art['sentiment'] = self.sent.analyze(content)['compound']
+            art['fake_news_score'] = self.fake_detector.detect_fake_news(content)
             self.col.update_one(
                 {'url': art['url']},
                 {'$setOnInsert': art},

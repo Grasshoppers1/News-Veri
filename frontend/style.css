@@ -30,3 +30,15 @@ body { font-family: Arial, sans-serif; }
 }
 .text-positive { color: green; }
 .text-negative { color: red; }
+
+.fake-news {
+    font-size: 0.9em;
+    color: #a94442;
+    margin-top: 4px;
+  }
+.fake-news-score {
+    font-weight: bold;
+    color: darkred;
+        margin-top: 4px;
+}
+      

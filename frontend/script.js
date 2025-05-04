@@ -62,12 +62,35 @@ async function loadArticles(query) {
       sentiment.className = 'sentiment ' + (art.sentiment>=0?'text-positive':'text-negative');
       sentiment.textContent = `Sentiment: ${score}`;
 
+      const fakeScore = document.createElement('div');
+    //   const fakeVal = art.fake_news_score !== undefined ? (art.fake_news_score * 100).toFixed(1) : 'Unknown';
+    //   fakeScore.className = 'fake-news-score';
+    //   fakeScore.textContent = `Fake News Score: ${fakeVal}%`;
+    let fakeVal = 'Unknown';
+    let scorePercent = 0;
+    if (art.fake_news_score !== undefined) {
+      scorePercent = art.fake_news_score * 100;
+      fakeVal = `${scorePercent.toFixed(1)}%`;
+    }
+    
+    fakeScore.className = 'fake-news-score';
+    fakeScore.textContent = `Fake News Score: ${fakeVal}`;
+    
+    // Color code based on risk level
+    if (scorePercent >= 70) {
+      fakeScore.style.color = 'red';
+    } else if (scorePercent >= 40) {
+      fakeScore.style.color = 'orange';
+    } else {
+      fakeScore.style.color = 'green';
+    }
+      
       if (art.description) {
         const desc = document.createElement('p');
         desc.textContent = art.description;
-        card.append(a, meta, sentiment, desc);
+        card.append(a, meta, sentiment,fakeScore,desc);
       } else {
-        card.append(a, meta, sentiment);
+        card.append(a, meta, sentiment,fakeScore);
       }
 
       container.appendChild(card);
