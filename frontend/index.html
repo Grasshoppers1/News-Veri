@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>News Sentiment App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h2>Topics</h2>
+      <ul id="topics">
+        <!-- topics populated by JS -->
+      </ul>
+      <button id="trend-btn">Show Sentiment Trend</button>
+    </aside>
+
+    <main class="main">
+      <h1 id="current-topic">Latest News: World</h1>
+      <div id="articles">
+        <!-- articles injected here -->
+      </div>
+      <canvas id="trend-chart" width="600" height="200" style="display:none;"></canvas>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; }
+.container { display: flex; height: 100vh; }
+.sidebar {
+  width: 200px; background: #f4f4f4; padding: 20px;
+  border-right: 1px solid #ddd;
+}
+.sidebar h2 { margin-bottom: 10px; }
+.sidebar ul { list-style: none; }
+.sidebar li { margin-bottom: 8px; }
+.sidebar button, .sidebar li button {
+  background: #fff; border: 1px solid #ccc; padding: 6px 10px;
+  width: 100%; text-align: left; cursor: pointer;
+}
+.sidebar button:hover, .sidebar li button:hover { background: #eaeaea; }
+
+.main {
+  flex: 1; padding: 20px; overflow-y: auto;
+}
+.main h1 { margin-bottom: 20px; }
+.article-card {
+  border: 1px solid #ddd; border-radius: 4px;
+  padding: 12px; margin-bottom: 16px;
+}
+.article-card a { font-size: 1.1em; color: #0077cc; text-decoration: none; }
+.article-card a:hover { text-decoration: underline; }
+.article-card .meta { font-size: 0.9em; color: #666; margin: 4px 0; }
+.article-card .sentiment {
+  font-weight: bold; margin: 6px 0;
+}
+.text-positive { color: green; }
+.text-negative { color: red; }
